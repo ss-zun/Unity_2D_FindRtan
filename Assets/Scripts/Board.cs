@@ -28,7 +28,7 @@ public class Board : MonoBehaviour
             float y = (i / 4) * 1.4f - 3.0f; // 몫 * 카드 간격
 
             go.transform.position = new Vector2(x, y); // 카드 배치
-            Debug.Log(arr[i]);
+            go.GetComponent<Card>().Setting(arr[i]);
         }
     }
 
