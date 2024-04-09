@@ -46,7 +46,7 @@ public class Card : MonoBehaviour
     // 1초 후 카드 파괴
     public void DestroyCard()
     {
-        Invoke("DestroyCardInvoke", 1.0f);
+        Invoke("DestroyCardInvoke", 0.5f);
     }
 
     // 카드 파괴
@@ -58,7 +58,7 @@ public class Card : MonoBehaviour
     // 1초 후 카드 닫기
     public void CloseCard()
     {
-        Invoke("CloseCardInvoke", 1.0f);
+        Invoke("CloseCardInvoke", 0.5f);
     }
 
     // 카드 닫기

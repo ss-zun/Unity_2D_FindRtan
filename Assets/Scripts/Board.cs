@@ -30,10 +30,7 @@ public class Board : MonoBehaviour
             go.transform.position = new Vector2(x, y); // 카드 배치
             go.GetComponent<Card>().Setting(arr[i]);
         }
-    }
 
-    void Update()
-    {
-        
+        GameManager.Instance.cardCount = arr.Length;
     }
 }

@@ -10,8 +10,10 @@ public class GameManager : MonoBehaviour
     public Card firstCard;   // 첫 번째로 선택한 카드
     public Card secondCard;  // 두 번째로 선택한 카드
 
-    public Text timeTxt;
+    public Text timeTxt;  // 게임 시간 표시
+    public GameObject endTxt;   // 게임이 끝났을 때 뜨는 '끝'
 
+    public int cardCount = 0;  // 현재 남아있는 카드의 개수
     float time = 0.0f;
 
     private void Awake()
@@ -24,7 +26,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 60; // 어떤 기기든지 초당 60프레임으로 렌더링 설정
+        Time.timeScale = 1.0f;
     }
 
     // Update is called once per frame
@@ -43,6 +46,12 @@ public class GameManager : MonoBehaviour
             // 파괴해라.
             firstCard.DestroyCard();
             secondCard.DestroyCard();
+            cardCount -= 2;
+            if(cardCount == 0)
+            {
+                Time.timeScale = 0.0f;
+                endTxt.SetActive(true); // Text 형으로 안받고 GameObject형으로 받아서 생략가능
+            }
         } // 다른 그림
         else
         {
