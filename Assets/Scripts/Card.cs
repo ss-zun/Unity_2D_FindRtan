@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-    int idx = 0;
+    public int idx = 0;
 
     public GameObject front; // 카드 이미지면
     public GameObject back;  // 카드 물음표면
@@ -26,5 +26,46 @@ public class Card : MonoBehaviour
         anim.SetBool("isOpen", true);
         front.SetActive(true);
         back.SetActive(false);
+
+        // firstCard가 비었다면,
+        if(GameManager.Instance.firstCard == null)
+        {
+            // firstCard에 내 정보를 넘겨준다.
+            GameManager.Instance.firstCard = this;
+        }
+        // firstCard가 비어있지 않다면,
+        else
+        {
+            // secondCard에 내 정보를 넘겨준다.
+            GameManager.Instance.secondCard = this;
+            // Mached 함수를 호출해 준다.
+            GameManager.Instance.Matched();
+        }
+    }
+
+    // 1초 후 카드 파괴
+    public void DestroyCard()
+    {
+        Invoke("DestroyCardInvoke", 1.0f);
+    }
+
+    // 카드 파괴
+    public void DestroyCardInvoke()
+    {
+        Destroy(gameObject);
+    }
+
+    // 1초 후 카드 닫기
+    public void CloseCard()
+    {
+        Invoke("CloseCardInvoke", 1.0f);
+    }
+
+    // 카드 닫기
+    public void CloseCardInvoke()
+    {
+        anim.SetBool("isOpen", false); // Idle 상태로 변경
+        front.SetActive(false);
+        back.SetActive(true);
     }
 }
