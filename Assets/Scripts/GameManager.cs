@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public Text timeTxt;  // 게임 시간 표시
     public GameObject endTxt;   // 게임이 끝났을 때 뜨는 '끝'
 
+    AudioSource audioSource;
+    public AudioClip clip;
+
     public int cardCount = 0;  // 현재 남아있는 카드의 개수
     float time = 0.0f;
 
@@ -28,6 +31,7 @@ public class GameManager : MonoBehaviour
     {
         Application.targetFrameRate = 60; // 어떤 기기든지 초당 60프레임으로 렌더링 설정
         Time.timeScale = 1.0f;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -49,6 +53,7 @@ public class GameManager : MonoBehaviour
         if(firstCard.idx == secondCard.idx)
         {
             // 파괴해라.
+            audioSource.PlayOneShot(clip);
             firstCard.DestroyCard();
             secondCard.DestroyCard();
             cardCount -= 2;

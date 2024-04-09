@@ -11,7 +11,15 @@ public class Card : MonoBehaviour
 
     public Animator anim; // Card 프리팹의 애니메이션
 
+    AudioSource audioSource;
+    public AudioClip clip;
+
     public SpriteRenderer frontImage; // 카드 이미지
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     // 카드 랜덤값, 이미지 셋팅
     public void Setting(int number)
@@ -23,6 +31,10 @@ public class Card : MonoBehaviour
     // 카드가 오픈됐을 때
     public void OpenCard()
     {
+        // 더 이상 다른 카드를 선택할 수 없도록
+        if (GameManager.Instance.secondCard != null) return;
+
+        audioSource.PlayOneShot(clip); // Play()와 차이점 : 중복 재생되지 않음, 딱 한 번만 실행됨
         anim.SetBool("isOpen", true);
         front.SetActive(true);
         back.SetActive(false);
