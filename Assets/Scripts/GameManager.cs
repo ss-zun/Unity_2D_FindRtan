@@ -35,6 +35,11 @@ public class GameManager : MonoBehaviour
     {
         time += Time.deltaTime;
         timeTxt.text = time.ToString("N2");
+        if(time > 30.0f)
+        {
+            Time.timeScale = 0.0f;
+            endTxt.SetActive(true); // Text 형으로 안받고 GameObject형으로 받아서 생략가능
+        }
     }
 
     // 카드 매치 기능
